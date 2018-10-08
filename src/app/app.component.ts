@@ -42,10 +42,12 @@ export class AppComponent implements OnInit {
   }
 
   onClickStartCombat() {
+    this.dndService.startCombat()
     this.inCombat = true
   }
 
   onClickEndCombat() {
+    this.dndService.endCombat()
     this.inCombat = false
   }
 

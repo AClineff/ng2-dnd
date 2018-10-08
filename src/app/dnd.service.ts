@@ -15,8 +15,6 @@ export class DndService {
   currentIndex = 0
 
   readonly currentCharacter$: BehaviorSubject<Character>
-  previousCharacter$: Subject<Character>
-  nextCharacter$: Subject<Character>
 
   // Dice Roller - No Typing Available :(
   dr: any
@@ -89,12 +87,31 @@ export class DndService {
     this.characters$.next(this.characters)
   }
 
+  startCombat(): void {
+    this.currentIndex = 0
+    this.currentCharacter$.next(this.characters[this.currentIndex])
+  }
+
+  endCombat(): void {
+    // Logic to be run at end of combat.
+  }
+
   getCurrentCharacter(): Observable<Character> {
     return this.currentCharacter$.asObservable()
   }
 
-  nextTurn() {
-    this.currentCharacter$.next(this.characters[0])
+  // Processes any turn-based logic
+  nextTurn(): void {
+    this.currentCharacter$.next(this.getNextCharacter())
+  }
+
+  getNextCharacter(): Character {
+    let nextIndex = ++this.currentIndex
+    if (nextIndex >= this.characters.length) {
+      nextIndex = 0
+    }
+    this.currentIndex = nextIndex
+    return this.characters[this.currentIndex]
   }
 }
 
