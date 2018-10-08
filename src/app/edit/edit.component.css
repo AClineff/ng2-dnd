@@ -1,0 +1,15 @@
+mat-drawer-container {
+  height: 100%;
+}
+
+.drawer-content {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.side-drawer {
+  padding: 10px;
+}

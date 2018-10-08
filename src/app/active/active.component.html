@@ -1,0 +1,11 @@
+<div *ngIf="(currentCharacter$ | async) as currentCharacter">{{currentCharacter.name}}</div>
+
+<!--<div>-->
+<!--{{previousCharacter?.name}}-->
+<!--</div>-->
+
+<!--<div>-->
+<!--{{nextCharacter?.name}}-->
+<!--</div>-->
+
+<button mat-raised-button (click)="clickNextTurn()">Next</button>

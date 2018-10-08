@@ -1,0 +1,19 @@
+<mat-card *ngIf="character.characterType==='PC'" class="character-card pc-character-card">
+  <mat-card-title>{{character.name}}</mat-card-title>
+  <mat-card-subtitle>{{asPC(character).playerName}}</mat-card-subtitle>
+  <mat-card-content>{{character.initiative}}</mat-card-content>
+  <mat-card-actions *ngIf="dmMode">
+    <button mat-button (click)="clickEdit.emit(character)">Edit</button>
+    <button mat-button (click)="clickDelete.emit(character)">Delete</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="character.characterType==='NPC'" class="character-card npc-character-card">
+  <mat-card-title>{{character.name}}</mat-card-title>
+  <mat-card-subtitle>Enemy</mat-card-subtitle>
+  <mat-card-content>{{character.initiative}}</mat-card-content>
+  <mat-card-actions *ngIf="dmMode">
+    <button mat-button (click)="clickEdit.emit(character)">Edit</button>
+    <button mat-button (click)="clickDelete.emit(character)">Delete</button>
+  </mat-card-actions>
+</mat-card>

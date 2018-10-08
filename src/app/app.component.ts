@@ -1,10 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { MatSlideToggleChange } from '@angular/material'
+import { Observable } from 'rxjs'
+import { DndService } from './dnd.service'
+import { Character, Characters } from './models/characters'
 
 @Component({
-  selector: 'app-root',
+  selector: 'dnd-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'ng2-dnd';
+export class AppComponent implements OnInit {
+
+  // DM Mode toggled on enables extra properties to be viewed
+  // and extra actions to be taken.
+  dmMode = true
+
+  // The user sees either the 'edit' field outside of the combat,
+  // or the 'combat' field inside combat.
+  inCombat = false
+
+  // Observable of total character list
+  characters$: Observable<Characters>
+
+  constructor(private dndService: DndService) {
+  }
+
+  ngOnInit() {
+    this.characters$ = this.dndService.getAllCharacters()
+  }
+
+  onClickAddPlayer() {
+    this.dndService.generateNewCharacter()
+  }
+
+  onClickAddNPC() {
+    this.dndService.generateNewNPC()
+  }
+
+  onClickRollInitiative() {
+    this.dndService.rollInitiative()
+  }
+
+  onClickStartCombat() {
+    this.inCombat = true
+  }
+
+  onClickEndCombat() {
+    this.inCombat = false
+  }
+
+  onToggleDMMode(event: MatSlideToggleChange) {
+    this.dmMode = event.checked
+  }
+
+  onClickDelete(c: Character) {
+    this.dndService.removeCharacter(c)
+  }
 }

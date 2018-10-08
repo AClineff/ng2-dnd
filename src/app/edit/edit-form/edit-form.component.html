@@ -1,0 +1,32 @@
+<form *ngIf="character" class="character-form">
+  <!-- Character Name -->
+  <mat-form-field class="full-width-input">
+    <input matInput placeholder="Character Name" [(ngModel)]="character.name" name="characterName">
+  </mat-form-field>
+
+  <!-- Player Name if PC -->
+  <mat-form-field *ngIf=isPlayer(character)>
+    <input matInput placeholder="Player Name" [(ngModel)]="asPC(character).playerName" name="playerName">
+  </mat-form-field>
+
+  <!-- Bonus Initiative Number -->
+  <mat-form-field>
+    <input matInput type="number" placeholder="Initiative Bonus" [(ngModel)]="character.initiativeBonus"
+           name="initiativeBonus">
+  </mat-form-field>
+
+  <!-- Armor Class -->
+  <mat-form-field>
+    <input matInput type="number" placeholder="Armor Class" [(ngModel)]="character.armorClass"
+           name="armorClass">
+  </mat-form-field>
+
+  <!-- Enemy Only Fields -->
+  <ng-container *ngIf="!isPlayer(character)">
+    <mat-form-field>
+      <input matInput type="number" placeholder="Total HP" [(ngModel)]="asNPC(character).totalHP" name="totalHP">
+    </mat-form-field>
+  </ng-container>
+</form>
+
+<button mat-button (click)="clickCloseDrawer.emit()">Close</button>
