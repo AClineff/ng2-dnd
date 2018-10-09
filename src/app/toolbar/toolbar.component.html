@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <button mat-button class="toolbar-button" (click)="clickAddPlayer.emit()">Add Player</button>
   <button mat-button class="toolbar-button" (click)="clickAddNPC.emit()">Add NPC</button>
-  <button mat-button class="toolbar-button" (click)="clickRollInitiative.emit()">Roll Initiative
+  <button [disabled]="inCombat" mat-button class="toolbar-button" (click)="clickRollInitiative.emit()">Roll Initiative
   </button>
   <button *ngIf="!inCombat" mat-raised-button color="accent" class="toolbar-button" (click)="clickStartCombat.emit()">
     Start Combat
