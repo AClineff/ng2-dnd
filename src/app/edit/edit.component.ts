@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { MatDrawer } from '@angular/material'
-import { DndService } from '../dnd.service'
+import { DndService } from '../services/dnd.service'
 import { Character, Characters } from '../models/characters'
 
 @Component({

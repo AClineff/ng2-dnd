@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { MatSlideToggleChange } from '@angular/material'
 
 @Component({
@@ -23,4 +23,8 @@ export class ToolbarComponent {
   clickStartCombat: EventEmitter<void> = new EventEmitter()
   @Output()
   clickEndCombat: EventEmitter<void> = new EventEmitter()
+  @Output()
+  clickSave: EventEmitter<void> = new EventEmitter()
+  @Output()
+  clickLoad: EventEmitter<void> = new EventEmitter()
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs'
-import { Character, Characters, NonPlayerCharacter, PlayerCharacter } from './models/characters'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { map, switchMap, switchMapTo } from 'rxjs/operators'
+import { Character, Characters, NonPlayerCharacter, PlayerCharacter } from '../models/characters'
 import * as RpgDiceRoller from 'rpg-dice-roller'
+import { ApiService } from './api.service'
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class DndService {
 
   // A list of all characters currently in play
   characters: (PlayerCharacter | NonPlayerCharacter)[]
-  characters$: Subject<Characters>
+  characters$: BehaviorSubject<Characters>
 
   currentIndex = 0
 
@@ -19,16 +21,28 @@ export class DndService {
   // Dice Roller - No Typing Available :(
   dr: any
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.characters = []
-    this.characters$ = new Subject<Characters>()
+    this.characters$ = new BehaviorSubject<Characters>(null)
     this.currentCharacter$ = new BehaviorSubject<Character>(null)
     this.dr = new RpgDiceRoller.DiceRoller()
   }
 
+  load(): void {
+    this.apiService.load().pipe(
+      map(payload => {
+        this.characters.push(payload)
+      })
+    ).subscribe()
+  }
+
+  save(): void {
+    this.apiService.save(this.characters$)
+  }
+
   // Return Subject that can be subscribed to
   getAllCharacters(): Observable<Characters> {
-    return this.characters$
+    return this.characters$.asObservable()
   }
 
   // Generate an empty Player Character template and emit the change.

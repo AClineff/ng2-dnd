@@ -9,5 +9,11 @@
   <button *ngIf="inCombat" mat-raised-button color="accent" class="toolbar-button" (click)="clickEndCombat.emit()">End
     Combat
   </button>
-  <mat-slide-toggle class="dm-toggle" [checked]="dmMode" (change)="toggleDMMode.emit($event)">DM Mode</mat-slide-toggle>
+  <section class="right-aligned">
+    <button mat-button [disabled]="!dmMode" (click)="clickSave.emit()">Save</button>
+    <button mat-button [disabled]="!dmMode" (click)="clickLoad.emit()">Load</button>
+    <mat-slide-toggle [checked]="dmMode" labelPosition="before" (change)="toggleDMMode.emit($event)">DM Mode
+    </mat-slide-toggle>
+  </section>
+
 </mat-toolbar>

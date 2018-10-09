@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
-import { DndService } from '../dnd.service'
+import { DndService } from '../services/dnd.service'
 import { Character } from '../models/characters'
 
 @Component({

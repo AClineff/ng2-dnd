@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { MatSlideToggleChange } from '@angular/material'
 import { Observable } from 'rxjs'
-import { DndService } from './dnd.service'
+import { DndService } from './services/dnd.service'
+import { ApiService } from './services/api.service'
 import { Character, Characters } from './models/characters'
 
 @Component({
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
   // Observable of total character list
   characters$: Observable<Characters>
 
-  constructor(private dndService: DndService) {
+  constructor(private dndService: DndService, private apiService: ApiService) {
   }
 
   ngOnInit() {
@@ -49,6 +50,14 @@ export class AppComponent implements OnInit {
   onClickEndCombat() {
     this.dndService.endCombat()
     this.inCombat = false
+  }
+
+  onClickSave() {
+    this.dndService.save()
+  }
+
+  onClickLoad() {
+    this.dndService.load()
   }
 
   onToggleDMMode(event: MatSlideToggleChange) {
